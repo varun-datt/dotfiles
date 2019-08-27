@@ -1,0 +1,30 @@
+#!/bin/sh
+
+echo "blah lab"
+
+# function __fish_git_using_command
+#   set -l cmd (__fish_git_needs_command)
+#   test -z "$cmd"
+#   and return 1
+#   contains -- $cmd $argv
+#   and return 0
+#   # Check aliases.
+#   set -l varname __fish_git_alias_(string escape --style=var -- $cmd)
+#   set -q $varname
+#   and contains -- $$varname $argv
+#   and return 0
+#   return 1
+# end
+
+#function __fish_git_branches
+  # This is much faster than using `git branch` and avoids having to deal with localized "detached HEAD" messages.
+#  command git for-each-ref --format='%(refname)' refs/heads/ refs/remotes/ 2>/dev/null \
+#    | string replace -r '^refs/heads/(.*)$' '$1\tLocal Branch' \
+#    | string replace -r '^refs/remotes/(.*)$' '$1\tRemote Branch'
+#end
+
+# complete --command 'git kill' --arguments '(cleanbr --_completion (commandline -cp)'
+# complete -f -c clean-branch -n '__fish_git_using_command branch' -a '(__fish_git_branches)'
+
+#complete -f -c git-kill -n '__fish_git_branches'
+#git-kill $argv

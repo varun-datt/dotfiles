@@ -1,0 +1,23 @@
+#!/bin/sh
+
+session="main"
+session2="extra"
+
+# set up tmux
+tmux start-server
+
+# create a new tmux session, starting vim from a saved session in the new window
+tmux new-session -d -A -s $session -n j main/webapp
+tmux new-session -d -A -s $session2 -n j sandbox
+
+# create a new window called nodetest
+tmux new-window -t $session:1 -n nodetest
+
+tmux selectp -t 1
+tmux send-keys "j main/webapp" C-m
+tmux splitw -h
+tmux selectp -t 2
+tmux send-keys "j main/webapp" C-m
+
+# return to main vim window
+tmux select-window -t $session:0

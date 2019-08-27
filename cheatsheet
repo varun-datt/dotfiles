@@ -1,0 +1,121 @@
+# Alias
+alias cs="nvim /Users/varun.datt/sandbox/github/dotfiles/cheatsheet"
+alias v="nvim"
+alias st="git status"
+alias lo="git log --oneline --decorate"
+alias g="git"
+alias ghack, gkill, gpr, gship, gsync
+
+# Transfer files
+rsync -avzhP ~/test master:/tmp
+scp -c blowfish-cbc -r file anotherfile username@remote:/some/dir/\{a,b\}
+# TODO alias scp="scp -c blowfish -r"
+
+# Git
+## Remove untracked files
+git clean -ndf
+## Delete ref that no longer exists
+git push . :refs/original/refs/heads/branch
+## Delete remote tracking branch (not remote branch)
+git branch -rd origin/name
+
+# Tmux
+## Create or open existing session
+tmux new -A -s session
+
+# Vim
+## Select
+Multi line select: V
+## Search and replace
+:%s/foo/bar/g
+## Format json 
+:%!python -m json.tool
+
+# Regex
+## Positive look behind: Find expression A where expression B precedes
+(?<=B)A
+## Negative look behind: Find expression A where expression B does not precede
+(?<!B)A
+## Positive look ahead: Find expression A where expression B follows
+A(?=B)
+## Negative look ahead: Find expression A where expression B does not follow
+A(?!B)
+
+# Sed
+## Find and replace
+sed -i -e 's/find/replace/(g)' file
+## Insert after line
+sed '/find/a after' file
+
+# nix Find
+find path -name ""
+
+# Node
+## Base64 encode string
+console.log(new Buffer("svc.webui-ci:Phoenix!123V").toString('base64'));
+
+# npm
+## List globally installed packages
+npm list -g --depth=1
+## Self signed certificate error - unable to get local issuer certificate (npm config strict-ssl or cafile)
+env NODE_TLS_REJECT_UNAUTHORIZED npm i
+
+# nvm
+## Install latest (or specific versions, lts or lts/carbon)
+nvm install node
+## Use temporarily
+nvm use 10.8.0
+## Set default (alias)
+nvm alias default 10.8.0
+## List available (remote) versions
+nvm ls(-remote)
+## Uninstall
+nvm uninstall 10.8.0
+## Install packages from different versions
+nvm install node --reinstall-packages-from=node
+
+# Network
+## Check if port is open
+curl -ks 10.84.40.70:1556 >/dev/null; echo Connected.; or echo Fail.
+
+# Storage
+## List of hard disks
+lsblk
+## List of file systems
+df -khT
+## Create parition
+fdisk
+
+# Diff
+diff -ay
+
+# Docker
+## Build container
+docker build -t name .
+docker build -t name -f f.Dockerfile
+## Exec
+docker exec -u root -it container command
+## Remove
+docker rm (docker ps -a | grep rabbitmq | awk '{print $1}')
+docker rmi (docker images -a | grep rabbitmq | awk '{print $1":"$2}')
+## Remove exited/dangling containers
+docker rm (docker ps -aq --no-trunc -f status=exited)
+## Remove dangling images
+docker rmi (docker images --filter "dangling=true" -q --no-trunc)
+
+# Brew
+## View installed packages
+brew list && echo "Cask" && brew cask list
+
+# MacOS
+## Add to /etc/hosts
+sudo killall -HUP mDNSResponder
+
+# Linux
+## Yum
+### Find what dependency provides tool
+yum whatprovides netstat
+
+# Openssl
+## View certificate
+openssl x509 -text -noout -in certname

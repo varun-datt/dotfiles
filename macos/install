@@ -1,0 +1,33 @@
+#!/bin/sh
+
+V_GIT_FOLDER_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+V_DOTFILES_PATH="~/.dotfiles"
+
+# iterm2 272c33
+
+# Install or update brew and update dependencies
+if ! command -v brew; then
+  echo "Installing brew..."
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" || exit 1
+else if [[ $1 == "-f" ]]; then
+  echo "Updating and upgrading brew..."
+  # Fetch the newest version of Homebrew from GitHub using git
+  brew update || exit 1
+#  brew upgrade || exit 1
+fi
+
+# Install dependencies
+brew install fish && echo $(brew --prefix)/bin/fish | sudo tee -a /etc/shells && chsh -s `which fish`
+# the_silver_searcher,tig, watchmanm gradle
+# brew install yarn --without-node
+brew install autojump fd jq git grc neovim nvm reattach-to-user-namespace ripgrep rsync tmux
+brew cask install iterm2 insomnia macdown
+
+# Install powerline fonts > 18pt Meslo LG M Regular for Powerline
+
+# Install SSHFS: brew cask install osxfuse && brew install sshfs
+
+# Create .dotfiles folder in home directory
+echo "Creating dotfiles folder..."
+mkdir -p $V_DOTFILES_PATH
+fish -c "set -U fish_user_paths $V_DOTFILES_FOLDER_NAME $fish_user_paths"
